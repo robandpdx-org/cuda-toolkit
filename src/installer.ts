@@ -80,12 +80,16 @@ export async function install(
       const files = await globber.glob()
       if (files.length > 0) {
         const rootDirectory = '/var/log'
-        const uploadResult = await artifact.uploadArtifact(
-          artifactName,
-          files,
-          rootDirectory
-        )
-        core.debug(`Upload result: ${uploadResult}`)
+        try {
+          const uploadResult = await artifact.uploadArtifact(
+            artifactName,
+            files,
+            rootDirectory
+          )
+          core.debug(`Upload result: ${uploadResult}`)
+        } catch (error) {
+          core.warning(`Error uploading log: ${error}`)
+        }
       } else {
         core.debug(`No log file to upload`)
       }
