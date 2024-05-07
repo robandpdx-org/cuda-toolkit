@@ -81,11 +81,9 @@ export async function install(
       if (files.length > 0) {
         const rootDirectory = '/var/log'
         try {
-          const uploadResult = await artifact.uploadArtifact(
-            artifactName,
-            files,
-            rootDirectory
-          )
+          const uploadResult = await artifact
+            .uploadArtifact(artifactName, files, rootDirectory)
+            .catch(error => core.warning(`Error uploading log: ${error}`))
           core.debug(`Upload result: ${uploadResult}`)
         } catch (error) {
           core.warning(`Error uploading log: ${error}`)
