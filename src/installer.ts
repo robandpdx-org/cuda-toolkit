@@ -78,19 +78,19 @@ export async function install(
       const patterns = ['/var/log/cuda-installer.log']
       const globber = await glob.create(patterns.join('\n'))
       const files = await globber.glob()
-      if (files.length > 0) {
-        const rootDirectory = '/var/log'
-        try {
-          const uploadResult = await artifact
-            .uploadArtifact(artifactName, files, rootDirectory)
-            .catch(error => core.warning(`Error uploading log: ${error}`))
-          core.debug(`Upload result: ${uploadResult}`)
-        } catch (error) {
-          core.warning(`Error uploading log: ${error}`)
-        }
-      } else {
-        core.debug(`No log file to upload`)
-      }
+      // if (files.length > 0) {
+      //   const rootDirectory = '/var/log'
+      //   try {
+      //     const uploadResult = await artifact
+      //       .uploadArtifact(artifactName, files, rootDirectory)
+      //       .catch(error => core.warning(`Error uploading log: ${error}`))
+      //     core.debug(`Upload result: ${uploadResult}`)
+      //   } catch (error) {
+      //     core.warning(`Error uploading log: ${error}`)
+      //   }
+      // } else {
+      //   core.debug(`No log file to upload`)
+      // }
     }
   }
 }
